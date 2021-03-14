@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Teste do webservice</title>
+        <meta charset="UTF-8">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <body>
+        <form id="form">
+            <label>Query:</label><br>
+            <input type="text" id="query" required/><br><br>
+            <label>Extras:</label><br>
+            <input type="text" id="text" style="width: 90%;"/><br><br>
+            <button type="submit">Submeter</button>
+        </form>
+        <div id="response" style="border: 1px solid lightgray; margin:10px; padding:20px; border-radius: 5px">
+            O conteúdo retornado aparecerá aqui
+        </div>
+    </body>
+    <script>
+       
+        
+        $('#form [type=submit]').click(function (e){
+            e.preventDefault();
+            console.log("Entra aqui");
+            var query = $('#query').val();
+            var content = $('#text').val();
+            $.ajax({
+                type:'POST',
+                url: 'service.php',
+                data: "q="+query+"&"+content,
+                success: function(html)
+                {
+                    document.getElementById('response').innerHTML = html;
+                }
+            });
+
+        });
+    </script>
+</html>
